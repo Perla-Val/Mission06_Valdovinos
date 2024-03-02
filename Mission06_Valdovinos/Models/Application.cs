@@ -9,8 +9,8 @@ namespace Mission06_Valdovinos.Models
         public int MovieID { get; set; } //automatically sets getters and setters READ ONLY VARIABLE
 
         [ForeignKey("CategoryID")]
-        public string CategoryID { get; set; }
-        public Categories Categories { get; set; }
+        public int CategoryID { get; set; }
+        //public Categories Categories { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

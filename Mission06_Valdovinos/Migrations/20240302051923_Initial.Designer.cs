@@ -10,7 +10,7 @@ using Mission06_Valdovinos.Models;
 namespace Mission06_Valdovinos.Migrations
 {
     [DbContext(typeof(MovieFormContext))]
-    [Migration("20240302021126_Initial")]
+    [Migration("20240302051923_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,9 +25,8 @@ namespace Mission06_Valdovinos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -59,6 +58,38 @@ namespace Mission06_Valdovinos.Migrations
                     b.HasKey("MovieID");
 
                     b.ToTable("Application");
+                });
+
+            modelBuilder.Entity("Mission06_Valdovinos.Models.Categories", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Super Hero"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Sci-Fi"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Action, Drama, Fantasy"
+                        });
                 });
 #pragma warning restore 612, 618
         }

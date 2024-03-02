@@ -30,6 +30,8 @@ namespace Mission06_Valdovinos.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.Categories = _context.Categories.ToList();
+
             return View();
         }
 
@@ -43,13 +45,44 @@ namespace Mission06_Valdovinos.Controllers
             return View("FormConfirmation", response);
         }
 
-        public IActionResult MovieList ()
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            var application = _context.Application
-                .Where(x => x.Edited == false)
-                .OrderBy(x => x.Title).ToList();
+            var recordToEdit = _context.Application
+                .Single(x => x.MovieID == id); 
 
-            return View();
+            ViewBag.Categories = _context.Categories.ToList();
+
+            return View("MovieForm", recordToEdit);
+        }
+        [HttpPost]
+
+        public IActionResult Edit(Application updatedInfo)
+        {
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index"); //go back to the table so it can save
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Application
+                .Single(x => x.MovieID == id);
+
+            return View(recordToDelete);
+        }
+        [HttpPost]
+
+        public IActionResult Delete(Application deletedInfo)
+        {
+            _context.Application.Remove(deletedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+
         }
     }
 }
