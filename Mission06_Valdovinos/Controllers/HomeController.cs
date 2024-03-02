@@ -6,6 +6,13 @@ namespace Mission06_Valdovinos.Controllers
 {
     public class HomeController : Controller
     {
+
+        private MovieFormContext _context;
+        public HomeController(MovieFormContext temp) //connstructure
+        {
+            _context = temp;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -26,6 +33,9 @@ namespace Mission06_Valdovinos.Controllers
 
         public IActionResult MovieForm(Application response)
         {
+            _context.Application.Add(response); //add to the database
+            _context.SaveChanges();
+
             return View("FormConfirmation", response);
         }
 
