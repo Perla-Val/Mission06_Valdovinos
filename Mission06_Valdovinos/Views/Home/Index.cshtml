@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<Application>
+
 <h1>The Joel Hilton Film Collection</h1>
 <div class="text-left">
     <p>This list only Contains Joel's Favorite Movies</p>
@@ -13,3 +15,35 @@
 <div>
     <a asp-controller="Home" asp-action="MovieForm">Add To the Collection</a>
 </div>
+
+<table class="table table-bordered">
+    <thead class="fw-bold">
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent To</td>
+            <td>Notes</td>
+        </tr>
+    </thead>
+
+    @foreach (var x in Model)
+    {
+        <tr>
+        <tbody>
+        <td>@x.CategoryID</td>
+        <td>@x.Title</td>
+        <td>@x.Year</td>
+        <td>@x.Director</td>
+        <td>@x.Rating</td>
+        <td>@x.Edited</td>
+        <td>@x.LentTo</td>
+        <td>@x.Notes</td>
+        </tbody>
+        </tr>
+    }
+
+</table>

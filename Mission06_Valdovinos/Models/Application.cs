@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission06_Valdovinos.Models
 {
@@ -6,8 +7,10 @@ namespace Mission06_Valdovinos.Models
     {
         [Key]
         public int MovieID { get; set; } //automatically sets getters and setters READ ONLY VARIABLE
-        
-        public string Category { get; set; }
+
+        [ForeignKey("CategoryID")]
+        public string CategoryID { get; set; }
+        public Categories Categories { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

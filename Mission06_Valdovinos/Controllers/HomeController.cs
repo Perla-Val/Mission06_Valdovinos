@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission06_Valdovinos.Models;
 using System.Diagnostics;
 
@@ -15,7 +16,10 @@ namespace Mission06_Valdovinos.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var application = _context.Application
+                .OrderBy(x => x.Title).ToList();
+
+            return View(application);
         }
 
         public IActionResult About()
@@ -39,6 +43,13 @@ namespace Mission06_Valdovinos.Controllers
             return View("FormConfirmation", response);
         }
 
+        public IActionResult MovieList ()
+        {
+            var application = _context.Application
+                .Where(x => x.Edited == false)
+                .OrderBy(x => x.Title).ToList();
 
+            return View();
+        }
     }
 }
