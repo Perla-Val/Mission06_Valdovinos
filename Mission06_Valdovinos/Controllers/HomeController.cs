@@ -16,7 +16,7 @@ namespace Mission06_Valdovinos.Controllers
 
         public IActionResult Index()
         {
-            var application = _context.Application
+            var application = _context.Movies
                 .OrderBy(x => x.Title).ToList();
 
             return View(application);
@@ -39,7 +39,7 @@ namespace Mission06_Valdovinos.Controllers
 
         public IActionResult MovieForm(Application response)
         {
-            _context.Application.Add(response); //add to the database
+            _context.Movies.Add(response); //add to the database
             _context.SaveChanges();
 
             return View("FormConfirmation", response);
@@ -48,8 +48,8 @@ namespace Mission06_Valdovinos.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var recordToEdit = _context.Application
-                .Single(x => x.MovieID == id); 
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id); 
 
             ViewBag.Categories = _context.Categories.ToList();
 
@@ -59,6 +59,7 @@ namespace Mission06_Valdovinos.Controllers
 
         public IActionResult Edit(Application updatedInfo)
         {
+
             _context.Update(updatedInfo);
             _context.SaveChanges();
 
@@ -69,16 +70,17 @@ namespace Mission06_Valdovinos.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var recordToDelete = _context.Application
-                .Single(x => x.MovieID == id);
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
 
             return View(recordToDelete);
         }
+
         [HttpPost]
 
-        public IActionResult Delete(Application deletedInfo)
+        public IActionResult Delete(Application application)
         {
-            _context.Application.Remove(deletedInfo);
+            _context.Movies.Remove(application);
             _context.SaveChanges();
 
             return RedirectToAction("Index");

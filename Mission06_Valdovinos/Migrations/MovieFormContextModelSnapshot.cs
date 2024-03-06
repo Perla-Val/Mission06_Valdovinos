@@ -18,11 +18,14 @@ namespace Mission06_Valdovinos.Migrations
 
             modelBuilder.Entity("Mission06_Valdovinos.Models.Application", b =>
                 {
-                    b.Property<int>("MovieID")
+                    b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("CopiedToPlex")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
@@ -33,11 +36,9 @@ namespace Mission06_Valdovinos.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LentTo")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
@@ -48,13 +49,12 @@ namespace Mission06_Valdovinos.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Year")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
 
-                    b.HasKey("MovieID");
+                    b.HasKey("MovieId");
 
-                    b.ToTable("Application");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("Mission06_Valdovinos.Models.Categories", b =>
@@ -70,23 +70,6 @@ namespace Mission06_Valdovinos.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Super Hero"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Sci-Fi"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryName = "Action, Drama, Fantasy"
-                        });
                 });
 #pragma warning restore 612, 618
         }
